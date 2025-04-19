@@ -3,6 +3,7 @@ package org.example.pricetracker_assignement.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+import java.util.Optional;
 import org.example.pricetracker_assignement.dto.PriceTrackerDTO;
 import org.example.pricetracker_assignement.entities.Users;
 import org.example.pricetracker_assignement.repository.UsersRepository;
@@ -15,20 +16,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Optional;
-
 class PriceTrackerServiceTest {
 
+    private static final String USER_NAME = "nhsuser";
     @Mock
     private UsersRepository usersRepository;
-
     @Mock
     private  FrequencyParser frequencyParser;
-
     @InjectMocks
     private PriceTrackerService priceTrackerService;
-
-    private static final String USER_NAME = "nhsuser";
 
     @BeforeEach
     void setUp() {
