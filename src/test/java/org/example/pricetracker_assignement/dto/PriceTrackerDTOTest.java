@@ -16,12 +16,10 @@ class PriceTrackerDTOTest {
   void checkGetterMethodsOfPriceTracker() {
 
     PriceTrackerDTO priceTrackerDTO = new PriceTrackerDTO();
-    priceTrackerDTO.setUserName("nhsuser");
     priceTrackerDTO.setProductUrl("abc/nhsproduct");
     priceTrackerDTO.setDesiredPrice(0.0);
     priceTrackerDTO.setFrequency("1m");
 
-    assertEquals("nhsuser", priceTrackerDTO.getUserName());
     assertEquals("abc/nhsproduct", priceTrackerDTO.getProductUrl());
     assertEquals(0.0, priceTrackerDTO.getDesiredPrice());
     assertEquals("1m", priceTrackerDTO.getFrequency());

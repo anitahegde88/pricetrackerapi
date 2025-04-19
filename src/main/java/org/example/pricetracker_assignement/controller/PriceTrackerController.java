@@ -20,7 +20,6 @@ public class PriceTrackerController {
   public ResponseEntity<String> sendPriceTrackerNotificationTo(
       @RequestHeader @NotBlank String userName,
       @Valid @RequestBody PriceTrackerDTO priceTrackerDTO) {
-      priceTrackerDTO.setUserName(userName);
-      return ResponseEntity.status(HttpStatus.OK).build();
+    return ResponseEntity.status(HttpStatus.OK).build();
   }
 }

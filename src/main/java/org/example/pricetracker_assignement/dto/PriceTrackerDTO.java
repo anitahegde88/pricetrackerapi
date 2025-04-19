@@ -8,18 +8,11 @@ import java.io.Serializable;
 
 @NoArgsConstructor
 public class PriceTrackerDTO implements Serializable {
-  private String userName;
   @NonNull @NotEmpty private String productUrl;
   private double desiredPrice;
+  @NonNull
+  @NotEmpty
   private String frequency;
-
-  public String getUserName() {
-    return userName;
-  }
-
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
 
   public @NonNull String getProductUrl() {
     return productUrl;
