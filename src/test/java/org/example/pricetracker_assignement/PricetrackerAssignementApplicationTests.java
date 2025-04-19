@@ -6,9 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class PricetrackerAssignementApplicationTests {
 
-    @Test
-    void contextLoads() {
-        // TODO document why this method is empty
-    }
-
+  @Test
+  void contextLoads() {
+    // TODO document why this method is empty
+  }
 }
