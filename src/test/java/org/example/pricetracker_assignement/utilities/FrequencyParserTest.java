@@ -15,8 +15,28 @@ class FrequencyParserTest {
   @DisplayName(value = "")
   void parseValidFrequency() {
     Long parsedFrequencyInMilliseconds = frequencyParser.parseFrequency("1m");
-    assertEquals( 60000L, parsedFrequencyInMilliseconds);
+    assertEquals(60000L, parsedFrequencyInMilliseconds);
     parsedFrequencyInMilliseconds = frequencyParser.parseFrequency("2m");
-    assertEquals( 120000L, parsedFrequencyInMilliseconds);
+    assertEquals(120000L, parsedFrequencyInMilliseconds);
+  }
+
+  @Test
+  @DisplayName(
+      value =
+          "Given user has sent invalid frequency"
+              + "When frequency is parsed"
+              + "Then exception must be thrown")
+  void parseInValidFrequency() {
+    try {
+      frequencyParser.parseFrequency("1mmmm");
+    } catch (Exception e) {
+      assertFalse(e.getMessage().isEmpty(), String.valueOf(true));
+    }
+
+    try {
+      frequencyParser.parseFrequency("2mmmm");
+    } catch (Exception e) {
+      assertFalse(e.getMessage().isEmpty(), String.valueOf(true));
+    }
   }
 }
