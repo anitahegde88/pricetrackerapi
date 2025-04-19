@@ -4,7 +4,7 @@ import static org.mockito.Mockito.*;
 
 import org.example.pricetracker_assignement.dto.PriceTrackerDTO;
 import org.example.pricetracker_assignement.entities.Users;
-import org.example.pricetracker_assignement.repository.PriceTrackerRepository;
+import org.example.pricetracker_assignement.repository.UsersRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import org.mockito.MockitoAnnotations;
 class PriceTrackerServiceTest {
 
     @Mock
-    private PriceTrackerRepository priceTrackerRepository;
+    private UsersRepository usersRepository;
 
     @InjectMocks
     private PriceTrackerService priceTrackerService;
@@ -48,6 +48,6 @@ class PriceTrackerServiceTest {
         users.setDesiredPrice(priceTrackerDto.getDesiredPrice());
         users.setFrequency((60000L));
         priceTrackerService.trackPriceScheduler(priceTrackerDto, USER_NAME);
-        verify(priceTrackerRepository, times(1)).save(users);
+        verify(usersRepository, times(1)).save(users);
     }
     }
