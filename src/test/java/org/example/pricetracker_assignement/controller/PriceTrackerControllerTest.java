@@ -1,26 +1,38 @@
 package org.example.pricetracker_assignement.controller;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.example.pricetracker_assignement.dto.PriceTrackerDTO;
+import org.example.pricetracker_assignement.service.PriceTrackerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(PriceTrackerController.class)
 class PriceTrackerControllerTest {
+
   @Autowired private MockMvc mockMvc;
   private String requestBody = null;
+  @MockitoBean
+  public PriceTrackerService priceTrackerService;
 
-  @BeforeEach
+private static final String USER_NAME = "nhsuser";
+    @BeforeEach
   void setUp() {
-
+  MockitoAnnotations.openMocks(this);
     requestBody =
         """
                   {
@@ -29,6 +41,7 @@ class PriceTrackerControllerTest {
                       "frequency": "1m"
                   }
               """;
+
   }
 
   @Test
@@ -140,5 +153,27 @@ class PriceTrackerControllerTest {
                 .content(requestBody)
                 .header("userName", "nhsuser"))
         .andExpect(status().isOk());
+  }
+
+  @Test
+  @DisplayName(
+          value =
+                  "Given I have a controller class named PriceTrackerController"
+                          + "AND I have an endpoint(postmapping) named /product-price-tracker/scheduler in it"
+                          + "AND that end point consumes PriceTrackerDTO(as a body) and user name (as a header info)"
+                          + "When I send the request to trigger this end point with valid inputs"
+                          + "Then It should call service layer method to save user details"
+                          + "AND should send the response back with correct http status code i.e. 200 OK")
+  void sendPriceTrackerNotification_withValidInputs_callsServiceLayer() throws Exception {
+
+    mockMvc
+            .perform(
+                    post("/product-price-tracker/scheduler")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .header("userName", USER_NAME)
+                            .content(requestBody))
+            .andExpect(status().isOk());
+    ArgumentCaptor<PriceTrackerDTO> captor = ArgumentCaptor.forClass(PriceTrackerDTO.class);
+    verify(priceTrackerService, times(1)).trackPriceScheduler(captor.capture(), eq(USER_NAME));
   }
 }
