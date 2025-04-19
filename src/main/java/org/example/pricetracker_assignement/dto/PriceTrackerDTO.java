@@ -1,4 +1,4 @@
-package org.example.pricetracker_assignement;
+package org.example.pricetracker_assignement.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.NonNull;
 import java.io.Serializable;
 
 @NoArgsConstructor
-public class PriceTracker implements Serializable {
+public class PriceTrackerDTO implements Serializable {
   private String userName;
   @NonNull @NotEmpty private String productUrl;
   private double desiredPrice;
