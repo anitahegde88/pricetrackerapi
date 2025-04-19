@@ -12,5 +12,4 @@ public class GlobalExceptionHandlers {
     private ResponseEntity<String> generalExceptionHandler(Exception exception){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
-
 }
