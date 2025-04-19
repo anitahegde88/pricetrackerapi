@@ -88,9 +88,30 @@ class PriceTrackerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody).header("userName", "nhsuser"))
                 .andExpect(status().isBadRequest());
-
-
     }
+
+  @Test
+  @DisplayName(
+          value =
+                  "Given I have a controller class named PriceTrackerController"
+                          + "AND I want to create an endpoint(postmapping) named /product-price-tracker/scheduler"
+                          + "AND that end point should consume PriceTrackerDTO(as a body) and user name (as a header info)"
+                          + "When I send the request to trigger this end point with empty frequency value"
+                          + "Then It should execute the end point"
+                          + "AND should send the response back with correct http status code i.e. 200 OK")
+  void sendPriceTrackerNotification_withFrequencyEmpty() throws Exception {
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    ObjectNode requestBodyJsonObject = (ObjectNode) objectMapper.readTree(requestBody);
+    requestBodyJsonObject.put("frequency", "");
+    requestBody = requestBodyJsonObject.toString();
+    mockMvc.perform(post("/product-price-tracker/scheduler")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(requestBody).header("userName", "nhsuser"))
+            .andExpect(status().isOk());
+
+
+  }
 
 
 }
