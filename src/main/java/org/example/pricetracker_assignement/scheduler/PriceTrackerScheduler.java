@@ -2,6 +2,7 @@ package org.example.pricetracker_assignement.scheduler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.pricetracker_assignement.entities.Users;
+import org.example.pricetracker_assignement.utilities.EmailSender;
 import org.example.pricetracker_assignement.utilities.JsonFileReader;
 import org.example.pricetracker_assignement.repository.UsersRepository;
 import org.springframework.scheduling.TaskScheduler;
@@ -22,11 +23,13 @@ public class PriceTrackerScheduler {
   private final TaskScheduler taskScheduler;
   private final UsersRepository usersRepository;
   private final JsonFileReader jsonFileReader;
+  private final EmailSender emailSender;
 
-  public PriceTrackerScheduler(UsersRepository usersRepository, JsonFileReader jsonFileReader) {
+  public PriceTrackerScheduler(UsersRepository usersRepository, JsonFileReader jsonFileReader, EmailSender emailSender) {
     this.usersRepository = usersRepository;
     this.jsonFileReader = jsonFileReader;
-    ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+      this.emailSender = emailSender;
+      ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
     scheduler.setPoolSize(2);
     scheduler.initialize();
     this.taskScheduler = scheduler;
@@ -45,7 +48,7 @@ public class PriceTrackerScheduler {
                   taskScheduler.schedule(
                       () -> {
                         if (actualPrice <= userItem.getDesiredPrice()) {
-                            System.out.println("Sending notification email: Price has dropped, current price of the product " + userItem.getProductUrl() + " is  " + actualPrice + " " + "user -" + userItem.getUserName()  + "  " + Instant.now());
+                            emailSender.sendEmail(actualPrice, userItem);
                         }
                       },
                       Instant.now());
