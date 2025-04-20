@@ -19,6 +19,9 @@ import org.mockito.MockitoAnnotations;
 class PriceTrackerServiceTest {
 
   private static final String USER_NAME = "nhsuser";
+  private static final String PRODUCT_URL_VALUE="abc/nhsproduct";
+  private static final double DESIRED_PRICE_VALUE=10.00;
+  private static final String FREQUENCY_VALUE="1m";
   @Mock private UsersRepository usersRepository;
   @Mock private FrequencyParser frequencyParser;
   @InjectMocks private PriceTrackerService priceTrackerService;
@@ -30,9 +33,9 @@ class PriceTrackerServiceTest {
 
   private PriceTrackerDTO getPriceTrackerDTO() {
     PriceTrackerDTO priceTrackerDTO = new PriceTrackerDTO();
-    priceTrackerDTO.setDesiredPrice(10.00);
-    priceTrackerDTO.setFrequency("1m");
-    priceTrackerDTO.setProductUrl("nhs/product");
+    priceTrackerDTO.setDesiredPrice(DESIRED_PRICE_VALUE);
+    priceTrackerDTO.setFrequency(FREQUENCY_VALUE);
+    priceTrackerDTO.setProductUrl(PRODUCT_URL_VALUE);
     return priceTrackerDTO;
   }
 

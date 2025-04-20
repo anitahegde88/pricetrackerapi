@@ -7,6 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PriceTrackerDTOTest {
 
+  private static final String PRODUCT_URL_VALUE="abc/nhsproduct";
+  private static final double DESIRED_PRICE_VALUE=0.0;
+  private static final String FREQUENCY_VALUE="1m";
+
   @Test
   @DisplayName(
       value =
@@ -16,12 +20,12 @@ class PriceTrackerDTOTest {
   void checkGetterMethodsOfPriceTracker() {
 
     PriceTrackerDTO priceTrackerDTO = new PriceTrackerDTO();
-    priceTrackerDTO.setProductUrl("abc/nhsproduct");
-    priceTrackerDTO.setDesiredPrice(0.0);
-    priceTrackerDTO.setFrequency("1m");
+    priceTrackerDTO.setProductUrl(PRODUCT_URL_VALUE);
+    priceTrackerDTO.setDesiredPrice(DESIRED_PRICE_VALUE);
+    priceTrackerDTO.setFrequency(FREQUENCY_VALUE);
 
-    assertEquals("abc/nhsproduct", priceTrackerDTO.getProductUrl());
-    assertEquals(0.0, priceTrackerDTO.getDesiredPrice());
-    assertEquals("1m", priceTrackerDTO.getFrequency());
+    assertEquals(PRODUCT_URL_VALUE, priceTrackerDTO.getProductUrl());
+    assertEquals(DESIRED_PRICE_VALUE, priceTrackerDTO.getDesiredPrice());
+    assertEquals(FREQUENCY_VALUE, priceTrackerDTO.getFrequency());
   }
 }

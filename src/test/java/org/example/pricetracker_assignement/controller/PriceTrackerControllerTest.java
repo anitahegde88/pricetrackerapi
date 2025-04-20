@@ -25,17 +25,20 @@ import org.springframework.test.web.servlet.MockMvc;
 class PriceTrackerControllerTest {
 
   private static final String USER_NAME = "nhsuser";
-  @MockitoBean
-  public PriceTrackerService priceTrackerService;
-  
+  private static final String FIELD_USER_NAME = "userName";
+  private static final String FIELD_FREQUENCY = "frequency";
+  private static final String FIELD_DESIRED_PRICE = "desiredPrice";
+  private static final String FIELD_PRODUCT_URL = "productUrl";
+
+  @MockitoBean public PriceTrackerService priceTrackerService;
+
   private String requestBody = null;
-  
-  @Autowired
-  private MockMvc mockMvc;
-  
+
+  @Autowired private MockMvc mockMvc;
+
   @BeforeEach
   void setUp() {
-  MockitoAnnotations.openMocks(this);
+    MockitoAnnotations.openMocks(this);
     requestBody =
         """
                   {
@@ -44,14 +47,12 @@ class PriceTrackerControllerTest {
                       "frequency": "1m"
                   }
               """;
-
   }
 
   @Test
   @DisplayName(
       value =
-          "Given I have a controller class named PriceTrackerController"
-              + "AND I want to create an endpoint(postmapping) named /product-price-tracker/scheduler"
+          "Given I trigger endpoint /product-price-tracker/scheduler"
               + "AND that end point should consume PriceTrackerDTO(as a body) and user name (as a header info)"
               + "When I send the request to trigger this end point with valid inputs"
               + "Then It should execute the end point successfully"
@@ -62,7 +63,7 @@ class PriceTrackerControllerTest {
         .perform(
             post("/product-price-tracker/scheduler")
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("userName", "nhsuser")
+                .header(FIELD_USER_NAME, USER_NAME)
                 .content(requestBody))
         .andExpect(status().isOk());
   }
@@ -70,8 +71,7 @@ class PriceTrackerControllerTest {
   @Test
   @DisplayName(
       value =
-          "Given I have a controller class named PriceTrackerController"
-              + "AND I want to create an endpoint(postmapping) named /product-price-tracker/scheduler"
+          "Given I trigger endpoint /product-price-tracker/scheduler"
               + "AND that end point should consume PriceTrackerDTO(as a body) and user name (as a header info)"
               + "When I send the request to trigger this end point with no user name"
               + "Then It should not execute the end point"
@@ -89,8 +89,7 @@ class PriceTrackerControllerTest {
   @Test
   @DisplayName(
       value =
-          "Given I have a controller class named PriceTrackerController"
-              + "AND I want to create an endpoint(postmapping) named /product-price-tracker/scheduler"
+          "Given I trigger endpoint /product-price-tracker/scheduler"
               + "AND that end point should consume PriceTrackerDTO(as a body) and user name (as a header info)"
               + "When I send the request to trigger this end point with empty ProdctURL"
               + "Then It should not execute the end point"
@@ -99,22 +98,21 @@ class PriceTrackerControllerTest {
 
     ObjectMapper objectMapper = new ObjectMapper();
     ObjectNode requestBodyJsonObject = (ObjectNode) objectMapper.readTree(requestBody);
-    requestBodyJsonObject.put("productUrl", "");
+    requestBodyJsonObject.put(FIELD_PRODUCT_URL, "");
     requestBody = requestBodyJsonObject.toString();
     mockMvc
         .perform(
             post("/product-price-tracker/scheduler")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody)
-                .header("userName", "nhsuser"))
+                .header(FIELD_USER_NAME, USER_NAME))
         .andExpect(status().isBadRequest());
   }
 
   @Test
   @DisplayName(
       value =
-          "Given I have a controller class named PriceTrackerController"
-              + "AND I want to create an endpoint(postmapping) named /product-price-tracker/scheduler"
+          "Given I trigger endpoint /product-price-tracker/scheduler"
               + "AND that end point should consume PriceTrackerDTO(as a body) and user name (as a header info)"
               + "When I send the request to trigger this end point with empty frequency value"
               + "Then It should not execute the end point"
@@ -123,22 +121,21 @@ class PriceTrackerControllerTest {
 
     ObjectMapper objectMapper = new ObjectMapper();
     ObjectNode requestBodyJsonObject = (ObjectNode) objectMapper.readTree(requestBody);
-    requestBodyJsonObject.put("frequency", "");
+    requestBodyJsonObject.put(FIELD_FREQUENCY, "");
     requestBody = requestBodyJsonObject.toString();
     mockMvc
         .perform(
             post("/product-price-tracker/scheduler")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody)
-                .header("userName", "nhsuser"))
+                .header(FIELD_USER_NAME, USER_NAME))
         .andExpect(status().isBadRequest());
   }
 
   @Test
   @DisplayName(
       value =
-          "Given I have a controller class named PriceTrackerController"
-              + "AND I want to create an endpoint(postmapping) named /product-price-tracker/scheduler"
+          "Given I trigger endpoint /product-price-tracker/scheduler"
               + "AND that end point should consume PriceTrackerDTO(as a body) and user name (as a header info)"
               + "When I send the request to trigger this end point with invalid desiredPrice"
               + "Then It should execute the end point"
@@ -147,35 +144,34 @@ class PriceTrackerControllerTest {
 
     ObjectMapper objectMapper = new ObjectMapper();
     ObjectNode requestBodyJsonObject = (ObjectNode) objectMapper.readTree(requestBody);
-    requestBodyJsonObject.put("desiredPrice", "");
+    requestBodyJsonObject.put(FIELD_DESIRED_PRICE, "");
     requestBody = requestBodyJsonObject.toString();
     mockMvc
         .perform(
             post("/product-price-tracker/scheduler")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody)
-                .header("userName", "nhsuser"))
+                .header(FIELD_USER_NAME, USER_NAME))
         .andExpect(status().isOk());
   }
 
   @Test
   @DisplayName(
-          value =
-                  "Given I have a controller class named PriceTrackerController"
-                          + "AND I have an endpoint(postmapping) named /product-price-tracker/scheduler in it"
-                          + "AND that end point consumes PriceTrackerDTO(as a body) and user name (as a header info)"
-                          + "When I send the request to trigger this end point with valid inputs"
-                          + "Then It should call service layer method to save user details"
-                          + "AND should send the response back with correct http status code i.e. 200 OK")
+      value =
+          "Given I trigger endpoint /product-price-tracker/scheduler"
+              + "AND that end point consumes PriceTrackerDTO(as a body) and user name (as a header info)"
+              + "When I send the request to trigger this end point with valid inputs"
+              + "Then It should call service layer method to save user details"
+              + "AND should send the response back with correct http status code i.e. 200 OK")
   void sendPriceTrackerNotification_withValidInputs_callsServiceLayer() throws Exception {
 
     mockMvc
-            .perform(
-                    post("/product-price-tracker/scheduler")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .header("userName", USER_NAME)
-                            .content(requestBody))
-            .andExpect(status().isOk());
+        .perform(
+            post("/product-price-tracker/scheduler")
+                .contentType(MediaType.APPLICATION_JSON)
+                .header(FIELD_USER_NAME, USER_NAME)
+                .content(requestBody))
+        .andExpect(status().isOk());
     ArgumentCaptor<PriceTrackerDTO> captor = ArgumentCaptor.forClass(PriceTrackerDTO.class);
     verify(priceTrackerService, times(1)).saveUserDetails(captor.capture(), eq(USER_NAME));
   }

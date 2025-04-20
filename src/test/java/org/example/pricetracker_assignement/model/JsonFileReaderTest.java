@@ -13,6 +13,10 @@ import org.junit.jupiter.api.Test;
 
 class JsonFileReaderTest {
 
+  private static final String JSON_FILE_NAME = "jsonfiles/actual_price.json";
+  private static final String ACTUAL_PRICE = "actualPrcie";
+
+
   private JsonFileReader jsonFileReader;
 
   @BeforeEach
@@ -27,12 +31,12 @@ class JsonFileReaderTest {
           + "Then it should return the correct price")
   void testReadFromJsonFile_ValidFile() throws Exception {
 
-    String fileName = "jsonfiles/actual_price.json";
+    String fileName = JSON_FILE_NAME;
     ClassLoader classLoader = getClass().getClassLoader();
     File file = new File(classLoader.getResource(fileName).getFile());
     ObjectMapper objectMapper = new ObjectMapper();
     JsonNode jsonNode = objectMapper.readTree(file);
-    double expectedPrice = jsonNode.get("actualPrcie").asDouble();
+    double expectedPrice = jsonNode.get(ACTUAL_PRICE).asDouble();
 
     double actualPrice = jsonFileReader.readFromJsonFile();
 

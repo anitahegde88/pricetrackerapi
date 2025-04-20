@@ -1,6 +1,7 @@
 package org.example.pricetracker_assignement.utilities;
 
 import lombok.NoArgsConstructor;
+import org.example.pricetracker_assignement.eorrs.MessagePool;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,7 +15,7 @@ public class FrequencyParser {
             case 'm':
                 return number * 60 * 1000;
             default:
-                throw new IllegalArgumentException("Invalid schedule frequency: " + frequency);
+                throw new IllegalArgumentException(MessagePool.INVALID_FREQUENCY+ frequency);
         }
     }
 }

@@ -3,6 +3,7 @@ package org.example.pricetracker_assignement.controller;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.example.pricetracker_assignement.dto.PriceTrackerDTO;
+import org.example.pricetracker_assignement.eorrs.MessagePool;
 import org.example.pricetracker_assignement.service.PriceTrackerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "product-price-tracker")
 public class PriceTrackerController {
+
   private final PriceTrackerService priceTrackerService;
 
     public PriceTrackerController(PriceTrackerService priceTrackerService) {
@@ -28,6 +30,7 @@ public class PriceTrackerController {
       @Valid @RequestBody PriceTrackerDTO priceTrackerDTO) {
 
     priceTrackerService.saveUserDetails(priceTrackerDTO, userName);
-    return ResponseEntity.status(HttpStatus.OK).body("You will receive email at provided frequency");
-  }
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(MessagePool.HTTP_OK_MESSAGE);
+}
 }
