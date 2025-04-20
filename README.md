@@ -49,5 +49,6 @@ nhsuser@nhsbsa.nhs.uk
 Point8:
 ---------
 Postman API key and token(available in properties file as well) :
-pricetracker-key
-pricetrackercode
+
+key :  pricetracker-key
+value :  pricetrackercode
