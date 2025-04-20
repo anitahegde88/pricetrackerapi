@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.example.pricetracker_assignement.entities.Users;
-import org.example.pricetracker_assignement.model.JsonFileReader;
+import org.example.pricetracker_assignement.utilities.JsonFileReader;
 import org.example.pricetracker_assignement.repository.UsersRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

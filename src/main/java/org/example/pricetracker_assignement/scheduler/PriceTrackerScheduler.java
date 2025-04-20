@@ -2,7 +2,7 @@ package org.example.pricetracker_assignement.scheduler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.pricetracker_assignement.entities.Users;
-import org.example.pricetracker_assignement.model.JsonFileReader;
+import org.example.pricetracker_assignement.utilities.JsonFileReader;
 import org.example.pricetracker_assignement.repository.UsersRepository;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -45,7 +45,7 @@ public class PriceTrackerScheduler {
                   taskScheduler.schedule(
                       () -> {
                         if (actualPrice <= userItem.getDesiredPrice()) {
-                            System.out.println("Sending notification email: Price has dropped for user");
+                            System.out.println("Sending notification email: Price has dropped for user  " +  userItem.getUserName()  + " " + Instant.now());
                         }
                       },
                       Instant.now());

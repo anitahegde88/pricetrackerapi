@@ -45,5 +45,4 @@ public class PriceTrackerService {
       usersRepository.saveAndFlush(user.get());
     }
   }
-
 }

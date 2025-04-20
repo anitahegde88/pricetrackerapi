@@ -24,13 +24,16 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(PriceTrackerController.class)
 class PriceTrackerControllerTest {
 
-  @Autowired private MockMvc mockMvc;
-  private String requestBody = null;
+  private static final String USER_NAME = "nhsuser";
   @MockitoBean
   public PriceTrackerService priceTrackerService;
-
-private static final String USER_NAME = "nhsuser";
-    @BeforeEach
+  
+  private String requestBody = null;
+  
+  @Autowired
+  private MockMvc mockMvc;
+  
+  @BeforeEach
   void setUp() {
   MockitoAnnotations.openMocks(this);
     requestBody =

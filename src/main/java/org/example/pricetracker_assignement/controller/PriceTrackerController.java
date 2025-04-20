@@ -28,6 +28,6 @@ public class PriceTrackerController {
       @Valid @RequestBody PriceTrackerDTO priceTrackerDTO) {
 
     priceTrackerService.trackPriceScheduler(priceTrackerDTO, userName);
-    return ResponseEntity.status(HttpStatus.OK).build();
+    return ResponseEntity.status(HttpStatus.OK).body("You will receive email at provided frequency");
   }
 }

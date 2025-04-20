@@ -1,4 +1,4 @@
-package org.example.pricetracker_assignement.model;
+package org.example.pricetracker_assignement.utilities;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
