@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-//@EnableJpaRepositories(basePackages = "org.example.pricetracker_assignement.repository")
 @EntityScan(basePackages = {"org.example.pricetracker_assignement.entities"})
 @EnableScheduling
 public class PricetrackerAssignementApplication {
