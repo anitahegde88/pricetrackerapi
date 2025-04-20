@@ -3,6 +3,7 @@ Point1: Assumptions :
 1) Aim is to demonstrate the functionality within the constraint of time vs full product delivery in an actual project.  
 2) Frequency for price check is in minutes. Note: To make the API work for other input frequencies such as morning, afternoon, hourly etc. existing frequency parser can be easily enhanced further.
 3) Incoming request parameters validation is limited to only default bean and Lombok validations. (i.e. Not implemented custom validator to validate incoming request parameters).
+4) Instead of email service, displayed email content on console.
 
 Point2 : 
 ----------
@@ -55,7 +56,7 @@ value :  pricetrackercode
 
 Point9:
 -------
-Some Lombok annotations are not working (tried changing the dependency version, maven clean and update etc. but didn't work). So getter,setters,constructors are implemented explicitly.
+Some Lombok annotations are not working (tried changing the dependency version, maven clean and update etc. but didn't work). So getter,setters,constructors are implemented explicitly. Also, Log4J annotation is not working, so sent output to console.
 
 
 Solution:
