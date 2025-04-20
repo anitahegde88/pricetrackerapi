@@ -57,5 +57,16 @@ Point9:
 -------
 Some Lombok annotations are not working (tried changing the dependency version, maven clean and update etc. but didn't work). So getter,setters,constructors are implemented explicitly.
 
+
+Solution:
+-----------
+
+![image](https://github.com/user-attachments/assets/0b5d38b8-204e-4551-bd51-7e25f3eab024)
+
+
+Code architecture:
+-----------------
 ![image](https://github.com/user-attachments/assets/85d2639f-ee68-4000-930d-d35e11d10406)
+
+
 
