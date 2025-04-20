@@ -45,7 +45,7 @@ public class PriceTrackerScheduler {
                   taskScheduler.schedule(
                       () -> {
                         if (actualPrice <= userItem.getDesiredPrice()) {
-                            System.out.println("Sending notification email: Price has dropped for user  " +  userItem.getUserName()  + " " + Instant.now());
+                            System.out.println("Sending notification email: Price has dropped, current price of the product " + userItem.getProductUrl() + " is  " + actualPrice + " " + "user -" + userItem.getUserName()  + "  " + Instant.now());
                         }
                       },
                       Instant.now());
