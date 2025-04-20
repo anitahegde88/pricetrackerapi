@@ -15,5 +15,5 @@ public interface UsersRepository extends JpaRepository<Users, String> {
           "SELECT * FROM Users a "
               + "WHERE DATEADD(MILLISECOND, a.FREQUENCY, a.LAST_RUN_TIME) <= CURRENT_TIMESTAMP",
       nativeQuery = true)
-  List<Users> findUsersWithElapsedSchedule();
+  List<Users> findUsersDueForNotification();
 }

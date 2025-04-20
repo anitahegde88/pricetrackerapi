@@ -33,10 +33,10 @@ public class PriceTrackerScheduler {
   }
 
   @Scheduled(fixedDelay = 60 * 1000)
-  public void globalPoolling() throws FileNotFoundException {
+  public void sendPriceDropNotifications() throws FileNotFoundException {
     double actualPrice = jsonFileReader.readFromJsonFile();
     synchronized (this) {
-      List<Users> userList = usersRepository.findUsersWithElapsedSchedule();
+      List<Users> userList = usersRepository.findUsersDueForNotification();
       if (!userList.isEmpty()) {
 
         userList.stream()

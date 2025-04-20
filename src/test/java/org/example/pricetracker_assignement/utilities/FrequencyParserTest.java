@@ -12,7 +12,9 @@ class FrequencyParserTest {
   private final FrequencyParser frequencyParser = new FrequencyParser();
 
   @Test
-  @DisplayName(value = "")
+  @DisplayName(value = "Given user sends the frequency in minute" +
+          "When the frequency is parsed" +
+          "Then parser should convert frequency value to milliseconds")
   void parseValidFrequency() {
     Long parsedFrequencyInMilliseconds = frequencyParser.parseFrequency("1m");
     assertEquals(60000L, parsedFrequencyInMilliseconds);
@@ -21,11 +23,9 @@ class FrequencyParserTest {
   }
 
   @Test
-  @DisplayName(
-      value =
-          "Given user has sent invalid frequency"
-              + "When frequency is parsed"
-              + "Then exception must be thrown")
+  @DisplayName(value = "Given user sends invalid frequency, example 1mmmmm" +
+          "When the frequency is parsed" +
+          "Then parser should throw an exception")
   void parseInValidFrequency() {
     try {
       frequencyParser.parseFrequency("1mmmm");

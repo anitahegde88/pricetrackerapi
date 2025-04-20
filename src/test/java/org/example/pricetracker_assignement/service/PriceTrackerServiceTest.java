@@ -47,7 +47,7 @@ class PriceTrackerServiceTest {
     PriceTrackerDTO priceTrackerDto = getPriceTrackerDTO();
     when(usersRepository.findById(any())).thenReturn(Optional.empty());
     when(frequencyParser.parseFrequency(any())).thenReturn(60000L);
-    priceTrackerService.trackPriceScheduler(priceTrackerDto, USER_NAME);
+    priceTrackerService.saveUserDetails(priceTrackerDto, USER_NAME);
     ArgumentCaptor<Users> captor = ArgumentCaptor.forClass(Users.class);
     verify(usersRepository, times(1)).saveAndFlush(captor.capture());
     Users capturedUser = captor.getValue();
@@ -69,7 +69,7 @@ class PriceTrackerServiceTest {
     PriceTrackerDTO priceTrackerDto = getPriceTrackerDTO();
     when(usersRepository.findById(any())).thenReturn(Optional.of(new Users()));
     when(frequencyParser.parseFrequency(any())).thenReturn(60000L);
-    priceTrackerService.trackPriceScheduler(priceTrackerDto, USER_NAME);
+    priceTrackerService.saveUserDetails(priceTrackerDto, USER_NAME);
     ArgumentCaptor<Users> captor = ArgumentCaptor.forClass(Users.class);
     verify(usersRepository, times(1)).saveAndFlush(captor.capture());
   }

@@ -177,6 +177,6 @@ class PriceTrackerControllerTest {
                             .content(requestBody))
             .andExpect(status().isOk());
     ArgumentCaptor<PriceTrackerDTO> captor = ArgumentCaptor.forClass(PriceTrackerDTO.class);
-    verify(priceTrackerService, times(1)).trackPriceScheduler(captor.capture(), eq(USER_NAME));
+    verify(priceTrackerService, times(1)).saveUserDetails(captor.capture(), eq(USER_NAME));
   }
 }

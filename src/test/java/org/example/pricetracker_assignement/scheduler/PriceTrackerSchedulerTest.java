@@ -43,13 +43,13 @@ class PriceTrackerSchedulerTest {
     List<Users> userList = new ArrayList<>();
     userList.add(user1);
 
-    when(usersRepository.findUsersWithElapsedSchedule()).thenReturn(userList);
+    when(usersRepository.findUsersDueForNotification()).thenReturn(userList);
     when(usersRepository.findById(anyString())).thenReturn(Optional.of(user1));
 
     doReturn(90.0).when(jsonFileReader).readFromJsonFile();
-    priceTrackerScheduler.globalPoolling();
+    priceTrackerScheduler.sendPriceDropNotifications();
 
-    verify(usersRepository, times(1)).findUsersWithElapsedSchedule();
+    verify(usersRepository, times(1)).findUsersDueForNotification();
     verify(usersRepository, times(1)).findById(USER_NAME);
   }
 
@@ -62,12 +62,12 @@ class PriceTrackerSchedulerTest {
 
     List<Users> userList = new ArrayList<>();
 
-    when(usersRepository.findUsersWithElapsedSchedule()).thenReturn(userList);
+    when(usersRepository.findUsersDueForNotification()).thenReturn(userList);
     doReturn(90.0).when(jsonFileReader).readFromJsonFile();
 
-    priceTrackerScheduler.globalPoolling();
+    priceTrackerScheduler.sendPriceDropNotifications();
 
-    verify(usersRepository, times(1)).findUsersWithElapsedSchedule();
+    verify(usersRepository, times(1)).findUsersDueForNotification();
     verify(usersRepository, times(0)).findById(USER_NAME);
   }
 }

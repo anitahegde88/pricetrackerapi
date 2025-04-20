@@ -27,7 +27,7 @@ public class PriceTrackerController {
       @RequestHeader @NotBlank String userName,
       @Valid @RequestBody PriceTrackerDTO priceTrackerDTO) {
 
-    priceTrackerService.trackPriceScheduler(priceTrackerDTO, userName);
+    priceTrackerService.saveUserDetails(priceTrackerDTO, userName);
     return ResponseEntity.status(HttpStatus.OK).body("You will receive email at provided frequency");
   }
 }

@@ -23,7 +23,7 @@ public class PriceTrackerService {
   }
 
   @Transactional
-  public void trackPriceScheduler(
+  public void saveUserDetails(
       @Valid PriceTrackerDTO priceTrackerDTO, @NotBlank String userName) {
 
     long interval = frequencyParser.parseFrequency(priceTrackerDTO.getFrequency());
