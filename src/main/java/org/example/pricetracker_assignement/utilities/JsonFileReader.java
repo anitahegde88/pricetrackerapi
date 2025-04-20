@@ -13,8 +13,8 @@ import java.io.FileNotFoundException;
 public class JsonFileReader {
 
     public double readFromJsonFile() throws FileNotFoundException {
-        double actcualPrice =0.0;
-        File file = null;
+        double actcualPrice;
+        File file;
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             file = new File(classLoader.getResource("jsonfiles/actual_price.json").getFile());

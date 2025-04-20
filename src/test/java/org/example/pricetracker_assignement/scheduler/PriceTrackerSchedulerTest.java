@@ -7,21 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.example.pricetracker_assignement.entities.Users;
-import org.example.pricetracker_assignement.utilities.JsonFileReader;
 import org.example.pricetracker_assignement.repository.UsersRepository;
+import org.example.pricetracker_assignement.utilities.JsonFileReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.scheduling.TaskScheduler;
 
 class PriceTrackerSchedulerTest {
   private static final String USER_NAME = "nhsuser";
   @Mock private UsersRepository usersRepository;
   @Mock private JsonFileReader jsonFileReader;
-  @Mock private TaskScheduler taskScheduler;
 
   @InjectMocks private PriceTrackerScheduler priceTrackerScheduler;
 
