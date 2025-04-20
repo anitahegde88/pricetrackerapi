@@ -56,3 +56,6 @@ value :  pricetrackercode
 Point9:
 -------
 Some Lombok annotations are not working (tried changing the dependency version, maven clean and update etc. but didn't work). So getter,setters,constructors are implemented explicitly.
+
+![image](https://github.com/user-attachments/assets/85d2639f-ee68-4000-930d-d35e11d10406)
+
