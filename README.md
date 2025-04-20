@@ -52,3 +52,7 @@ Postman API key and token(available in properties file as well) :
 
 key :  pricetracker-key
 value :  pricetrackercode
+
+Point9:
+-------
+Some Lombok annotations are not working (tried changing the dependency version, maven clean and update etc. but didn't work). So getter,setters,constructors are implemented explicitly.
